@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mamba Task Manager (Browser Edition)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #121212; color: #e0e0e0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .todo-container { background: #1e1e1e; padding: 30px; border-radius: 12px; width: 100%; max-width: 550px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+        h2 { text-align: center; margin-bottom: 20px; color: #fff; }
+        .input-section { display: flex; gap: 10px; margin-bottom: 25px; }
+        input, button { padding: 12px; border: 1px solid #333; border-radius: 6px; background-color: #252525; color: #fff; font-size: 14px; outline: none; }
+        input[type="text"] { flex: 3; }
+        input[type="number"] { flex: 1; text-align: center; }
+        button { background-color: #00adb5; color: #fff; font-weight: bold; cursor: pointer; border: none; }
+        button:hover { background-color: #00f5ff; }
+        ul { list-style: none; }
+        li { background: #2a2a2a; padding: 15px; border-radius: 6px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #00adb5; }
+        .priority-badge { background-color: #333; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; color: #00f5ff; margin-right: 10px; }
+        .task-text-container { display: flex; align-items: center; flex-grow: 1; }
+        .delete-link { color: #888; text-decoration: none; font-weight: bold; font-size: 16px; padding: 0 10px; }
+        .delete-link:hover { color: #ff4d4d; }
+    </style>
+</head>
+<body>
+
+    <div class="todo-container">
+        <h2>Mamba Task Manager</h2>
+        
+        <form action="/add" method="POST" class="input-section">
+            <input type="text" name="text" placeholder="Enter a new task..." required autocomplete="off">
+            <input type="number" name="priority" min="1" max="9" placeholder="Prio (1-9)" required>
+            <button type="submit">Add Task</button>
+        </form>
+
+        <ul>
+            <li th:each="task, iterStat : ${tasks}">
+                <div class="task-text-container">
+                    <span class="priority-badge" th:text="'P' + ${task.priority}">P1</span>
+                    <span th:text="${task.text}">Task Sample Description</span>
+                </div>
+                <a th:href="@{/delete/{index}(index=${iterStat.index})}" class="delete-link">✕</a>
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>
