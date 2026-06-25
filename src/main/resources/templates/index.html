@@ -39,7 +39,7 @@
                     <span class="priority-badge" th:text="'P' + ${task.priority}">P1</span>
                     <span th:text="${task.text}">Task Sample Description</span>
                 </div>
-                <a th:href="@{/delete/{index}(index=${iterStat.index})}" class="delete-link">✕</a>
+                <a th:href="@{/delete/{id}(id=${task.id})}" class="delete-link">✕</a>
             </li>
         </ul>
     </div>
