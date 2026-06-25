@@ -26,10 +26,10 @@
 
     <div class="todo-container">
         <h2>Mamba Task Manager</h2>
-        
-        <form action="/add" method="POST" class="input-section">
-            <input type="text" name="text" placeholder="Enter a new task..." required autocomplete="off">
-            <input type="number" name="priority" min="1" max="9" placeholder="Prio (1-9)" required>
+
+        <form th:action="@{/add}" method="POST">
+            <input type="text" name="text" placeholder="New Task" required>
+            <input type="number" name="priority" min="1" max="9" required>
             <button type="submit">Add Task</button>
         </form>
 
